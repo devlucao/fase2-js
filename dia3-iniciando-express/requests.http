@@ -1,0 +1,17 @@
+### Health Check
+GET http://localhost:3000/health 
+
+### Users Check
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "Lucas",
+    "age": 34
+}
+
+### GetUsers Check
+GET http://localhost:3000/users/Lucas
+
+### Get Search
+GET http://localhost:3000/search?term=node
