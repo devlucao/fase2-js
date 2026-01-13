@@ -3,7 +3,7 @@ const users = require("../data/users.db");
 const getActiveUsersService = () => {
     const activeUsers = users.filter((user) => user.active);
 
-    if(!activeUsers) {
+    if(activeUsers.length === 0) {
         throw new Error("USER_NOT_FOUND");
     }
 

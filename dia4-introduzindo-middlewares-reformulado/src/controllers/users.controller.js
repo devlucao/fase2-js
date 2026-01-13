@@ -6,8 +6,15 @@ const home = (req, res) => {
 }
 
 const getActiveUsers = (_req, res) => {
-    const activeUsers = getActiveUsersService();
-    return res.status(200).json(activeUsers);
+    try {
+        const activeUsers = getActiveUsersService();
+        return res.status(200).json(activeUsers);
+    } catch(error) {
+        if(error.message === "USER_NOT_FOUND") {
+            return res.status(404).json({ error: "Não existe usuário ativo." });
+        }
+    }
+    return res.status(500).json({ error: "Erro interno." });
 }
 
 const getUserById = (req, res) => {
