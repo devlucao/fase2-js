@@ -1,23 +1,32 @@
-const users = require("../data/users.db");
+const { getActiveUsersService, getUsersByIdService, getAdultActiveUsersService } = require("../services/users.service");
+
 
 const home = (req, res) => {
     res.status(200).json({ message: "Deu bom!" });
 }
 
 const getActiveUsers = (_req, res) => {
-    const activeUsers = users.filter((user) => user.active);
+    const activeUsers = getActiveUsersService();
     return res.status(200).json(activeUsers);
 }
 
 const getUserById = (req, res) => {
-    const { id } = req.params;
-    const findedUser = users.find((user) => user.id === Number(id));
+    try {
+        const { id } = req.params;
+        const foundUser = getUsersByIdService(id);
 
-    if(!findedUser) {
-        return res.status(404).json({ error: "Usuário não encontrado!" });
+        return res.status(200).json(foundUser);
+    } catch (error) {
+        if (error.message === "USER_NOT_FOUND") {
+            return res.status(404).json({ error: "Usuário não encontrado." });
+        }
     }
-
-    res.status(200).json({ findedUser, message: "Usuário encontrado." });
+    return res.status(500).json({ error: "Erro interno." });
 }
 
-module.exports = { home, getActiveUsers, getUserById };
+const getAdultActiveUsers = (req, res) => {
+    const adultActiveUsers = getAdultActiveUsersService();
+    res.status(200).json(adultActiveUsers)
+}
+
+module.exports = { home, getActiveUsers, getUserById, getAdultActiveUsers };
