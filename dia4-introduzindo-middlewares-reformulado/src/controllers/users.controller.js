@@ -1,4 +1,8 @@
-const { getActiveUsersService, getUsersByIdService, getAdultActiveUsersService } = require("../services/users.service");
+const {
+    getActiveUsersService,
+    getUsersByIdService,
+    getAdultActiveUsersService
+} = require("../services/users.service");
 
 
 const home = (req, res) => {
@@ -9,8 +13,8 @@ const getActiveUsers = (_req, res) => {
     try {
         const activeUsers = getActiveUsersService();
         return res.status(200).json(activeUsers);
-    } catch(error) {
-        if(error.message === "USER_NOT_FOUND") {
+    } catch (error) {
+        if (error.message === "USER_NOT_FOUND") {
             return res.status(404).json({ error: "Não existe usuário ativo." });
         }
     }
