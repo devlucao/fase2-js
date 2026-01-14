@@ -33,4 +33,17 @@ const updateUserService = (id) => {
     return foundUser;
 }
 
-module.exports = { createUserService, updateUserService };
+const deleteUserService = (id) => {
+    const foundUserIndex = users.findIndex((user) => user.id === Number(id));
+
+    if(foundUserIndex === -1) {
+        throw new Error("USER_NOT_FOUND");
+    }
+
+    const updatedDatabase = users.filter((_, index) => index !== foundUserIndex);
+
+    return updatedDatabase;
+    
+}
+
+module.exports = { createUserService, updateUserService, deleteUserService };
