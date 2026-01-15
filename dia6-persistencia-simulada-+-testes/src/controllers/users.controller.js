@@ -22,17 +22,9 @@ const updateUser = (req, res) => {
     try{
         const { name, age, active } = req.body;
         const { id } = req.params;
-        let user = updateUserService(id);
+        const user = updateUserService(id, { name, age, active });
     
-        user = {
-            id: user.id,
-            name,
-            age,
-            active,
-            role: user.role
-        }
-
-        return res.status(204).json(user);
+        return res.status(200).json(user);
 
     } catch (error) {
         if(error.message === "USER_NOT_FOUND") {

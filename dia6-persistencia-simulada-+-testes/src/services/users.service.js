@@ -23,14 +23,21 @@ const createUserService = (data) => {
     return newUser;
 }
 
-const updateUserService = (id) => {
-    const foundUser = users.find((user) => user.id === Number(id));
+const updateUserService = (id, data) => {
+    const foundUserIndex = users.findIndex((user) => user.id === Number(id));
 
-    if(!foundUser) {
+    if(foundUserIndex === -1) {
         throw new Error("USER_NOT_FOUND");
     }
 
-    return foundUser;
+    const updatedUser = {
+        ...users[foundUserIndex],
+        ...data
+    }
+
+    users[foundUserIndex] = updatedUser;
+
+    return updatedUser
 }
 
 const deleteUserService = (id) => {
@@ -40,9 +47,9 @@ const deleteUserService = (id) => {
         throw new Error("USER_NOT_FOUND");
     }
 
-    const updatedDatabase = users.filter((_, index) => index !== foundUserIndex);
+    const [removedUser] = users.splice(foundUserIndex, 1); // armazena o usuário removido, porém só o splice já faria o delete
 
-    return updatedDatabase;
+    return removedUser;
     
 }
 
