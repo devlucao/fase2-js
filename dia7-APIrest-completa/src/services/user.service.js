@@ -35,15 +35,38 @@ const createUserService = (data) => {
   const newUser = {
     id: referenceId + 1,
     displayName: data.displayName,
+    email: data.email,
     password: data.password,
     image: data.image,
   }
 
   users.push(newUser);
+  console.log(users)
 
   return newUser;
 }
 
+const loginService = (email, password) => {
+
+  if(!email) {
+    throw new Error("EMPTY_EMAIL");
+  }
+
+  if(!password) {
+    throw new Error("EMPTY_PASSWORD");
+  }
+
+  const [userExists] = users.filter((user) => user.email === email);
+  
+  if(!userExists) {
+    throw new Error("USER_NOT_EXISTS");
+  }
+
+  return 
+}
 
 
-module.exports = { createUserService }
+module.exports = { 
+  createUserService,
+  loginService
+ }

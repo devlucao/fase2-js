@@ -1,4 +1,4 @@
-const { createUserService } = require("../services/user.service")
+const { createUserService, loginService } = require("../services/user.service")
 
 const createUser = (req, res) => {
   try{
@@ -32,4 +32,32 @@ const createUser = (req, res) => {
 
 }
 
-module.exports = { createUser }
+const login = (req, res) => {
+  try{
+    const { email, password } = req.body;
+    loginService(email, password);
+
+    return res.status(200).json({ token: "token-123" });
+
+  } catch(error) {
+    
+    if(error.message === "EMPTY_EMAIL") {
+      return res.status(400).json({ error: "E-mail ausente." });
+    }
+
+    if(error.message === "EMPTY_PASSWORD") {
+      return res.status(400).json("Senha ausente.");
+    }
+
+    if(error.message === "USER_NOT_EXISTS") {
+      return res.status(400).json("Usuário não encontrado, tente novamente.");
+    }
+
+  }
+  return res.status(500).json({ error: "Erro interno." });
+}
+
+module.exports = {
+  createUser, 
+  login
+}
