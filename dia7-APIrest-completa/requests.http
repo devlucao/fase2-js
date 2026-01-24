@@ -1,0 +1,9 @@
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "displayName": "Lucas Freitas",
+  "email": "lucas@email.com",
+  "password": "123456",
+  "image": "http://imagem.com/img.png"
+}
