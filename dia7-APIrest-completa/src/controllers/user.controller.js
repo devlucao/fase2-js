@@ -1,4 +1,4 @@
-const { createUserService, loginService } = require("../services/user.service")
+const { createUserService, loginService, getUsersService } = require("../services/user.service")
 
 const createUser = (req, res) => {
   try{
@@ -57,7 +57,20 @@ const login = (req, res) => {
   return res.status(500).json({ error: "Erro interno." });
 }
 
+const getUsers = (_req, res) => {
+
+  try {
+    const users = getUsersService();
+
+    return res.status(200).json(users);
+    
+  } catch(error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
+
 module.exports = {
   createUser, 
-  login
+  login,
+  getUsers
 }

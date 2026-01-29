@@ -1,4 +1,5 @@
 const users = require("../data/users.db");
+const { validateToken } = require("../middlewares/auth.middleware");
 
 const createUserService = (data) => {
   if(!data.email) {
@@ -65,8 +66,10 @@ const loginService = (email, password) => {
   return 
 }
 
+const getUsersService = () => users; 
 
 module.exports = { 
   createUserService,
-  loginService
+  loginService,
+  getUsersService,
  }

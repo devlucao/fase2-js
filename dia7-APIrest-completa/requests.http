@@ -18,3 +18,8 @@ Content-Type: application/json
   "email": "lucas@email.com",
   "password": "123456"
 }
+
+### GET USERS
+GET http://localhost:3000/user
+Content-Type: application/json
+Authorization: token-123
