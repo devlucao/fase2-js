@@ -23,3 +23,8 @@ Content-Type: application/json
 GET http://localhost:3000/user
 Content-Type: application/json
 Authorization: token-123
+
+### GET USERS BY ID
+GET http://localhost:3000/user/1
+Content-Type: application/json
+Authorization: token-123

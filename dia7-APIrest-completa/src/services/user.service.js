@@ -1,5 +1,4 @@
 const users = require("../data/users.db");
-const { validateToken } = require("../middlewares/auth.middleware");
 
 const createUserService = (data) => {
   if(!data.email) {
@@ -42,7 +41,6 @@ const createUserService = (data) => {
   }
 
   users.push(newUser);
-  console.log(users)
 
   return newUser;
 }
@@ -66,10 +64,21 @@ const loginService = (email, password) => {
   return 
 }
 
-const getUsersService = () => users; 
+const getUsersService = () => users;
+
+const getUserByIdService = (id) => {
+  const foundUser = users.find((user) => user.id === Number(id));
+
+  if(!foundUser) {
+    throw new Error("USER_NOT_FOUND");
+  }
+
+  return foundUser;
+}
 
 module.exports = { 
   createUserService,
   loginService,
   getUsersService,
+  getUserByIdService
  }
