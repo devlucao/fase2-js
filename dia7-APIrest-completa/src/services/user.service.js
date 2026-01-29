@@ -45,16 +45,7 @@ const createUserService = (data) => {
   return newUser;
 }
 
-const loginService = (email, password) => {
-
-  if(!email) {
-    throw new Error("EMPTY_EMAIL");
-  }
-
-  if(!password) {
-    throw new Error("EMPTY_PASSWORD");
-  }
-
+const loginService = (email) => {
   const [userExists] = users.filter((user) => user.email === email);
   
   if(!userExists) {

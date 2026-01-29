@@ -28,3 +28,12 @@ Authorization: token-123
 GET http://localhost:3000/user/1
 Content-Type: application/json
 Authorization: token-123
+
+### POST CREATE CATEGORY
+POST http://localhost:3000/categories
+Content-Type: application/json
+Authorization: token-123
+
+{
+  "name": "Negócios"
+}
