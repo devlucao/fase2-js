@@ -29,7 +29,7 @@ const loginService = (email) => {
     throw new Error("USER_NOT_EXISTS");
   }
 
-  return 
+  return userExists;
 }
 
 const getUsersService = () => users;

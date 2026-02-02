@@ -16,7 +16,7 @@ const validateCreateUserBody = (req, res, next) => {
     return res.status(400).json({ error: "E-mail inválido, favor verificar." });
   }
 
-  if(!displayName || displayName < 8) {
+  if(!displayName || displayName.length < 8) {
     return res.status(400).json({ error: "Nome de exibição precisa ter 8 ou mais caracteres." })
   } 
 

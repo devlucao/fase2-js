@@ -8,7 +8,7 @@ const createUser = (req, res) => {
 
   } catch(error) {
     if(error.message === "USER_ALREADY_EXISTS") {
-      return res.status(400).json({ error: "Usuário já cadastrado com este e-mail, favor verificar." });
+      return res.status(409).json({ error: "Usuário já cadastrado com este e-mail, favor verificar." });
     }
   }
   return res.status(500).json({ error: "Erro interno." });
